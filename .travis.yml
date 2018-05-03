@@ -1,0 +1,26 @@
+sudo:
+  required
+
+language:
+  generic
+
+services:
+  docker
+
+before_script:
+  - find ssh -type d -exec chmod 755 {} \;
+  - find ssh -type f -exec chmod 644 {} \;
+
+script:
+  - docker build -t "$TRAVIS_REPO_SLUG" .
+
+before_deploy:
+  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+
+deploy:
+  - provider: script
+    script: docker push "$TRAVIS_REPO_SLUG"
+
+notifications:
+  slack:
+    secure: iFJp+DiK4wu7WXnCmlTkVOks9VNmr9H7n/oOv7L575Y679jYLSKwFF2zNfIBT71d7YmC5fwH1cmWLLTajvPOfK+ack7R5T3rjwW5WKAt8xsBOVGDe5xIySBEJhjKJENpF/HIhxTQ6BAvRXwkmZbtvAjkVjh2wJPckK6AU0H5h1YxN6bzj2Bf5Ea4ag3zh4iJQ9KpdBfVl1SbeZPQyrwTu8hwkupxN7yqQ0bLkEDtb6qun1ii8Dgcy2ygL2E8MM95J4ODM1f253wJheJopFTRbRr9Kc++/husPmxAq+cha/ug+No6azgIzMz+V/2EUp+XyQuROIo8d1h3Ygl00KLm86dKaF3CFTkObo9kfJHDVJMvbbGsA8Aqkd0tTL2LQeLxgHNs7WorzGUhQGtMxdwWHZOJI4xpPCQzMAWQwsndu/YkHdOPT5+AF6vZYGAnsFxWzKYp3V0dJGAOfv5AhDkBq7dV2eWJYm4YX2FqXKj6Lw93oN3KAz9KKrn7dEFamgNUepSK+TA4a7aCx/qdM7r2K12FxIC/FUWm6M3TzZQu4Eussf+Tu+2WhTBcmsxiJ5kI7h5xoxacTEwLVFzf4Gw9/YlRBM8utxNluvI/YdYtSQd/NDlVdhMMAXxczn43tr1VGbHvnSzEukZrEg3cebrY70SJrmM9tcHKF/FnZQ/u2qM=

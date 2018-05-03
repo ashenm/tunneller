@@ -1,0 +1,14 @@
+# use a registered port
+Port 2222
+
+# use 'alpine' owned private host keys
+HostKey /home/alpine/.ssh/ssh_host_rsa_key
+HostKey /home/alpine/.ssh/ssh_host_dsa_key
+HostKey /home/alpine/.ssh/ssh_host_ecdsa_key
+HostKey /home/alpine/.ssh/ssh_host_ed25519_key
+
+# disable tunneled clear text passwords
+PasswordAuthentication no
+
+# suppress motd
+PrintMotd no
