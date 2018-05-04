@@ -9,7 +9,8 @@ services:
 
 before_script:
   - find ssh -type d -exec chmod 755 {} \;
-  - find ssh -type f -exec chmod 644 {} \;
+  - find ssh/etc -type f -exec chmod 644 {} \;
+  - find ssh/sbin -type f -exec chmod 655 {} \;
 
 script:
   - docker build -t "$TRAVIS_REPO_SLUG" .

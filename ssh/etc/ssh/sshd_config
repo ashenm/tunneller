@@ -1,0 +1,14 @@
+# user public keys
+AuthorizedKeysFile /usr/local/etc/ssh/authorized_keys
+
+# use on the fly host keys
+HostKey /var/tmp/ssh_host_rsa_key
+HostKey /var/tmp/ssh_host_dsa_key
+HostKey /var/tmp/ssh_host_ecdsa_key
+HostKey /var/tmp/ssh_host_ed25519_key
+
+# disable tunneled clear text passwords
+PasswordAuthentication no
+
+# suppress motd
+PrintMotd no

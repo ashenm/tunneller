@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+# Run OpenSSH Daemon
+
+# shell attributes
+set -e
+
+# generate hostkeys
+ssh-keygen -t dsa -f /var/tmp/ssh_host_dsa_key -N '' 1>> /dev/null
+ssh-keygen -t ecdsa -f /var/tmp/ssh_host_ecdsa_key -N '' 1>> /dev/null
+ssh-keygen -t ed25519 -f /var/tmp/ssh_host_ed25519_key -N '' 1>> /dev/null
+ssh-keygen -t rsa -b 4096 -f /var/tmp/ssh_host_rsa_key -N '' 1>> /dev/null
+
+# start openssh daemon
+/usr/sbin/sshd -D -f /usr/local/etc/ssh/sshd_config -p "${PORT:-2222}"
