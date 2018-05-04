@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 # Start a dynamic application-level port forwarding session
 
+set -e
+
 #######################################
 # Print usage instructions to STDIN
 # Arguments:

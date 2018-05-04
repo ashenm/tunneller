@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -e
+
 # image tag
 BUILD_TARGET=ashenm/tunneller
 
