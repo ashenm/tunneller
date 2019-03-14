@@ -1,18 +1,12 @@
 #!/usr/bin/env sh
+# Build Docker Image
 
 set -e
 
-# image label
-BUILD_TAG=dev
-BUILD_IMAGE=ashenm/tunneller
+# clinch permissions
+find ssh -type d -exec chmod 755 {} \;
+find ssh/etc -type f -exec chmod 644 {} \;
+find ssh/sbin -type f -exec chmod 755 {} \;
 
-# scripts directory
-SCRIPT_DIRECTORY="$(dirname "$(readlink -f "$BASH_SOURCE")")"
-
-# handle custom tag
-test "$1" = "-t" \
-  -o "$1" = "--tag" \
-    && BUILD_TAG="${2:?Invalid TAG}"
-
-# build image
-docker build --no-cache --tag "$BUILD_IMAGE:$BUILD_TAG" "$(dirname "$SCRIPT_DIRECTORY")"
+# build docker image
+docker build --no-cache --tag "${TRAVIS_REPO_SLUG:-ashenm/tunneller}:${TRAVIS_BRANCH:-latest-alpha}" .

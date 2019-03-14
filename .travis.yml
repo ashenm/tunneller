@@ -1,26 +1,15 @@
-sudo:
-  required
-
 language:
-  generic
+  minimal
 
 services:
   docker
 
-before_script:
-  - find ssh -type d -exec chmod 755 {} \;
-  - find ssh/etc -type f -exec chmod 644 {} \;
-  - find ssh/sbin -type f -exec chmod 755 {} \;
-
 script:
-  - docker build -t "$TRAVIS_REPO_SLUG" .
-
-before_deploy:
-  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+  make build
 
 deploy:
-  - provider: script
-    script: docker push "$TRAVIS_REPO_SLUG"
+  provider: script
+  script: make deploy
 
 notifications:
   slack:

@@ -128,7 +128,7 @@ test $SELF_HOSTED && {
   SOURCE_ADDRESS="$(echo $SOURCE_ADDRESS | sed 's/^.*://')"
 
   # spin docker container
-  docker run --rm --detach --name "$CONTINER_REFERENCE" --publish "$ENDPOINT_PORT":"$ENDPOINT_PORT" ashenm/tunneller:dev
+  docker run --rm --detach --name "$CONTINER_REFERENCE" --publish "$ENDPOINT_PORT":"$ENDPOINT_PORT" "${TRAVIS_REPO_SLUG:-ashenm/tunneller}:${TRAVIS_BRANCH:-latest-alpha}"
 
   # clean on exit
   trap "docker stop $CONTINER_REFERENCE; exit" EXIT

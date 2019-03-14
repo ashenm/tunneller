@@ -16,7 +16,7 @@ RUN apk add --no-cache openssh
 RUN echo 'This is Tunneller' > /etc/nologin
 
 # copy artifacts
-COPY ssh /usr/local/
+COPY tunneller /usr/local/
 
 # change to non-root user
 USER alpine
