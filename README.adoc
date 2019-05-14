@@ -1,0 +1,56 @@
+= Tunneller
+:toc:
+:toc-placement!:
+:warning-caption: :warning:
+:note-caption: :paperclip:
+
+[discrete]
+====== A SOCKS Server
+image:https://travis-ci.org/ashenm/tunneller.svg?branch=latest[Build Status, link=https://travis-ci.org/ashenm/tunneller] image:https://img.shields.io/badge/tag-latest-blue.svg[Image Tag, link=https://github.com/ashenm/tunneller/tree/latest] image:https://images.microbadger.com/badges/image/ashenm/tunneller.svg[Image Overview, link=https://hub.docker.com/r/ashenm/tunneller/]
+
+[discrete]
+=== Table of Contents
+toc::[title="", levels=4]
+
+=== USAGE
+
+==== Using `scripts/run.sh`
+
+===== Basic Usage
+
+[source, shell]
+----
+./run.sh <PATH TO PRIVATE KEY> <TUNNELLER HOSTNAME>
+----
+
+===== Additional Options
+
+[source, man]
+----
+./run.sh [OPTIONS] <PATH TO PRIVATE KEY> <TUNNELLER HOSTNAME>
+
+Options:
+
+        --dev                 Run in development mode.
+                              Run Tunneller locally and spawns a session against it
+
+    -f  --forward             Specify [ADDRESS:]PORT for local dynamic
+                              application-level port forwarding (default 'localhost:5050')
+
+        --help                Print usage
+
+    -p  --port                Specify endpoint port to connect (defaut '2222')
+
+    -u  --user                Specify the user to log in as (default 'alpine')
+----
+
+=== Using a SSH Client
+
+Alternately, a SSH client can be used to spawn a session. For instance, with OpenSSH to bound local port `8080` using private key `~/.ssh/id_dsa` for authentication
+
+[source, shell]
+----
+ssh -N -D 8080 -i ~/.ssh/id_dsa -l alpine -p 2222 example.org
+----
+
+NOTE: The use of flag `N` is important since the unprivileged user loggings are disabled
