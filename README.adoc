@@ -18,7 +18,7 @@ toc::[title="", levels=4]
 
 ===== Basic Usage
 
-[source, shell]
+[source, man]
 ----
 ./run.sh <PATH TO PRIVATE KEY> <TUNNELLER HOSTNAME>
 ----
@@ -48,7 +48,7 @@ Options:
 
 Alternately, a SSH client can be used to spawn a session. For instance, with OpenSSH to bound local port `8080` using private key `~/.ssh/id_dsa` for authentication
 
-[source, shell]
+[source, cmd]
 ----
 ssh -N -D 8080 -i ~/.ssh/id_dsa -l alpine -p 2222 example.org
 ----
